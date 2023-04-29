@@ -1,0 +1,11 @@
+.result {
+  display: none;
+}
+
+.search {
+  width: 50%;
+}
+
+.notFound {
+  display: none;
+}

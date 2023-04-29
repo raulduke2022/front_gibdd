@@ -1,21 +1,52 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  let divMain = document.querySelector("div.main");
   let button = document.querySelector("button");
-  let result = document.querySelector("input[name=result]");
+  let result = document.querySelector(".result");
+  let notFound = document.querySelector(".notFound");
   button.addEventListener("click", (event) => {
     event.preventDefault();
+    notFound.style.display = "none";
     let input = document.querySelector("input[name=vin]").value;
     console.log(input);
-    fetch(`https://testyoursite.ru:9002/cars/${input}`)
-      .then((response) => response.json())
-      .then((data) => {
-        result.value = data[0].gosnomer;
-        // let { car_id, gosnomer, vin_nomer, office, model } = element;
-        // divMain.innerHTML =
-        //   divMain.innerHTML +
-        //   `
-        // <p>${car_id}${gosnomer}${vin_nomer}${office}${model}</p>
-        // `;
+    fetch(`https://testyoursite.ru:9002/checks_vin/${input}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json().then((data) => {
+            let {
+              gosnomer,
+              vin_nomer,
+              office,
+              check_date,
+              diagnosticcards,
+              dcexpirationdate,
+              pointaddress,
+              chassis,
+              operatorname,
+              odometervalue,
+              dcnumber,
+              dcdate,
+            } = data;
+            result.style.display = "block";
+            console.log(gosnomer, dcexpirationdate);
+            result.innerHTML = `
+            <h2>Результат запроса</h2>
+            <p>Общие данные</p>
+            <ul>
+              <li>Госномер</li>
+              <li>Офис</li>
+              <li>Марка/Модель</li>
+            </ul>
+            <p>Данные о диагностической карте</p>
+            <div class="dataVipuska">ДАТА выпуска ${dcexpirationdate}</div>
+            `;
+          });
+        } else {
+          throw new Error("Not 2xx response");
+        }
+      })
+      .catch((error) => {
+        result.innerHTML = ``;
+        console.log(error);
+        notFound.style.display = "block";
       });
   });
 });
