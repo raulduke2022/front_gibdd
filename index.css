@@ -1,19 +1,58 @@
 .result {
-  display: block;
-}
-
-.search {
-  width: 50%;
+  display: none;
 }
 
 .notFound {
   display: none;
 }
 
-body {
-  background-color: #FFFFCC;
+button {
+  margin-bottom: 15px !important;
+}
+
+* {
+  margin: 10px 0px 0px 0px;
+}
+
+.search {
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+* {
+  font-family: "Ubuntu", sans-serif !important;
+  font-size: 20px !important;
 }
 
 input[name="vin"] {
   margin-bottom: 10px;
+}
+
+.pill-response {
+  font-size: 1rem !important;
+}
+
+.btn-primary:hover {
+  top: 2px;
+}
+
+.btn-primary:active {
+  box-shadow: 0 0 #090230;
+  top: 6px;
+}
+
+.btn {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  display: block;
+  position: relative;
+  font-size: 16px;
+  font-weight: 300;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 25px 80px;
+  margin: 0 auto;
+  border-radius: 20px;
 }

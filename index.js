@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     event.preventDefault();
     notFound.style.display = "none";
     let input = document.querySelector("input[name=vin]").value;
-    console.log(input);
-    fetch(`https://testyoursite.ru:9002/checks_vin/${input}`)
+    if (input) {
+      input = input.toUpperCase();
+    }
+    fetch(`https://testyoursite.ru:9002/checks_gosnomer/${input}`)
       .then((response) => {
         if (response.ok) {
           return response.json().then((data) => {
@@ -26,18 +28,93 @@ document.addEventListener("DOMContentLoaded", (event) => {
               dcdate,
             } = data;
             result.style.display = "block";
-            console.log(gosnomer, dcexpirationdate);
-            result.innerHTML = `
-            <h2>Результат запроса</h2>
-            <p>Общие данные</p>
-            <ul>
-              <li>Госномер</li>
-              <li>Офис</li>
-              <li>Марка/Модель</li>
-            </ul>
-            <p>Данные о диагностической карте</p>
-            <div class="dataVipuska">ДАТА выпуска ${dcexpirationdate}</div>
+            result.innerHTML = "";
+            setTimeout(() => {
+              result.innerHTML = `
+            <div class="main-data">
+            <p>
+            <span class="badge rounded-pill bg-light text-dark"
+              >Результат запроса
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-light text-dark"
+                >Данные об автомобиле
+              </p>
+            <p>
+              <span class="badge rounded-pill bg-success pill-response"
+                >Госномер</span
+              >
+              ${gosnomer}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-success pill-response"
+                >Офис</span
+              >
+              ${office}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-success pill-response"
+                >VIN номер</span
+              >
+              ${vin_nomer}
+            </p>
+          </div>
+          <p>
+            <span class="badge rounded-pill bg-light text-dark"
+              >Данные диагностической карты
+            </p>          <div class="diagnostic">
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Дата проверки</span
+              >
+              ${check_date}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Статус</span
+              >
+              ${diagnosticcards}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Дата регистрации</span
+              >
+              ${dcdate}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Срок действия</span
+              >
+              ${dcexpirationdate}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Адрес</span
+              >
+              ${pointaddress}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Номер оператора</span
+              >
+              ${operatorname}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Значение оператора</span
+              >
+              ${odometervalue}
+            </p>
+            <p>
+              <span class="badge rounded-pill bg-info text-dark pill-response"
+                >Номер диагностической карты</span
+              >
+              ${dcnumber}
+            </p>
+          </div>
+        </div>
             `;
+            }, 100);
           });
         } else {
           throw new Error("Not 2xx response");
