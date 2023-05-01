@@ -28,15 +28,25 @@
 
         <!-- Result ok-->
         <div class="result">
-        <!-- Result bad-->
+          <!-- Result bad-->
+        </div>
+        <div class="notFound">
+          <p>
+            <span class="badge rounded-pill bg-danger pill-response"
+              >Ничего не удалось найти</span
+            >
+          </p>
+        </div>
       </div>
-      <div class="notFound">
-        <p>
-          <span class="badge rounded-pill bg-danger pill-response"
-            >Ничего не удалось найти</span
-          >
-        </p>
-      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <form action="post" enctype="multipart/form-data">
+        <div class="mb-3 input-div d-flex justify-content-center">
+          <label for="formFile" class="form-label">Загрузите фото</label>
+          <input class="form-control" type="file" id="formFile" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
     <script src="./index.js"></script>
   </body>

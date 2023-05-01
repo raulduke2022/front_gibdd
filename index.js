@@ -126,4 +126,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         notFound.style.display = "block";
       });
   });
+  // let submitButton = document.querySelector("button[type=submit]");
+  // submitButton.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   let photo = document.getElementById("formFile").files[0];
+  //   let formData = new FormData();
+  //   formData.append("photo", photo);
+  //   fetch("/upload/image", { method: "POST", body: formData });
+  // });
 });

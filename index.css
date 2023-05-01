@@ -56,3 +56,7 @@ input[name="vin"] {
   margin: 0 auto;
   border-radius: 20px;
 }
+
+.input-div {
+  width: 50%;
+}
